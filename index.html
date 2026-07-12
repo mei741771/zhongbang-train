@@ -195,6 +195,49 @@
   body.editing *:focus{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px}
   [contenteditable]{caret-color:var(--amber)}
 
+  /* ===== COURSE BANNER ===== */
+  .course-banner{
+    position:relative;padding:clamp(40px,7vh,76px) 0;margin:0;
+    background:
+      linear-gradient(120deg,rgba(255,180,84,.14),rgba(255,107,94,.10)),
+      radial-gradient(700px 320px at 12% 50%,rgba(255,138,91,.16),transparent 60%);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .course-banner::before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:6px;
+    background:var(--grad);box-shadow:0 0 22px rgba(255,138,91,.6);
+  }
+  .cb-inner{display:flex;flex-direction:column;gap:8px}
+  .cb-no{
+    font-family:var(--mono);font-weight:700;letter-spacing:.18em;font-size:14px;
+    color:var(--bg);background:var(--grad);align-self:flex-start;
+    padding:5px 16px;border-radius:30px;box-shadow:0 4px 16px rgba(255,138,91,.4);
+  }
+  .cb-title{font-family:var(--serif);font-weight:900;font-size:clamp(26px,4.4vw,40px);line-height:1.15;color:var(--text)}
+  .cb-sub{font-size:15px;color:var(--muted);max-width:680px}
+
+  /* ===== COURSE MAP ===== */
+  .course-map{position:relative;padding:clamp(64px,10vh,120px) 0;min-height:auto}
+  .cm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .cm-card{
+    position:relative;padding:26px 24px;border-radius:18px;
+    background:var(--surface);border:1px solid var(--line);
+    transition:.3s;overflow:hidden;
+  }
+  .cm-card::after{
+    content:"";position:absolute;right:-30px;top:-30px;width:120px;height:120px;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,180,84,.18),transparent 70%);pointer-events:none;
+  }
+  .cm-card:hover{transform:translateY(-5px);border-color:rgba(255,180,84,.5);box-shadow:0 14px 40px rgba(255,138,91,.16)}
+  .cm-no{
+    display:inline-block;font-family:var(--mono);font-weight:700;letter-spacing:.12em;font-size:12px;
+    color:var(--amber);border:1px solid rgba(255,180,84,.45);background:rgba(255,180,84,.1);
+    padding:4px 14px;border-radius:30px;margin-bottom:16px;
+  }
+  .cm-card h4{font-family:var(--serif);font-weight:700;font-size:21px;color:var(--gold);margin-bottom:12px;line-height:1.35}
+  .cm-card p{font-size:14px;color:var(--muted);line-height:1.7}
+  @media(max-width:820px){.cm-grid{grid-template-columns:1fr}}
+
   /* TOC PANEL */
   #toc-panel{
     position:fixed;top:0;right:-340px;width:320px;height:100vh;
@@ -213,6 +256,13 @@
   }
   #toc-panel .toc-list a:hover,
   #toc-panel .toc-list a.active{color:var(--text);background:var(--surface-2);border-color:var(--line)}
+  #toc-panel .toc-group{
+    list-style:none;margin:18px 0 8px;padding:0 4px;
+    font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.08em;
+    color:var(--amber);text-transform:none;
+    border-left:3px solid var(--amber);padding-left:10px;
+  }
+  #toc-panel .toc-group:first-child{margin-top:4px}
   #toc-overlay{
     position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:199;
     opacity:0;pointer-events:none;transition:opacity .3s;
@@ -281,9 +331,41 @@
   </div>
   <div class="scroll-cue">向下滚动 ↓</div>
 </section>
+  <!-- ============ COURSE MAP ============ -->
+  <div class="course-map">
+    <div class="wrap">
+      <span class="eyebrow reveal">培训课程大纲</span>
+      <h2 class="reveal d1" style="margin-bottom:26px">三门<span class="hl">核心课程</span></h2>
+      <div class="cm-grid reveal d2">
+        <div class="cm-card">
+          <span class="cm-no">课程一</span>
+          <h4>长护险政策与制度</h4>
+          <p>政策背景与制度框架 · 参保缴费 · 待遇保障</p>
+        </div>
+        <div class="cm-card">
+          <span class="cm-no">课程二</span>
+          <h4>长护险申请 / 评估（机构 + 个人）</h4>
+          <p>失能等级评估 · 重度失智认定 · 经办管理与服务流程</p>
+        </div>
+        <div class="cm-card">
+          <span class="cm-no">课程三</span>
+          <h4>服务开展、管理及验收</h4>
+          <p>服务形式与规范 · 双定点管理 · 定点机构管理与评价验收</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<!-- ==================== 01 ==================== -->
-<section id="c1">
+  <!-- ============ COURSE 1 ============ -->
+  <div class="course-banner" data-course="1">
+    <div class="wrap cb-inner">
+      <span class="cb-no">课程 1</span>
+      <h3 class="cb-title">长护险政策与制度</h3>
+      <p class="cb-sub">读懂制度是什么、谁参保、保什么</p>
+    </div>
+  </div>
+
+<section data-course="1" id="c1">
   <div class="wrap">
     <span class="eyebrow reveal">第一章 · 政策背景与制度框架</span>
     <span class="num-tag reveal">01</span>
@@ -306,9 +388,7 @@
     </div>
   </div>
 </section>
-
-<!-- ==================== 02 ==================== -->
-<section id="c2">
+<section data-course="1" id="c2">
   <div class="wrap">
     <span class="eyebrow reveal">第二章 · 参保缴费</span>
     <span class="num-tag reveal">02</span>
@@ -334,9 +414,7 @@
     <p class="body reveal d4" style="margin-top:18px;color:var(--muted)">说明：职工用人单位承担部分通过医保费率平移转换方式从其缴纳的职工医保费中划转，<b style="color:var(--amber-soft)">不增加企业负担</b>；居民个人缴费在缴纳基本医保时同步征缴，其余由财政补助。</p>
   </div>
 </section>
-
-<!-- ==================== 03 ==================== -->
-<section id="c3">
+<section data-course="1" id="c3">
   <div class="wrap">
     <span class="eyebrow reveal">第三章 · 待遇保障</span>
     <span class="num-tag reveal">03</span>
@@ -367,9 +445,16 @@
     </div>
   </div>
 </section>
+  <!-- ============ COURSE 2 ============ -->
+  <div class="course-banner" data-course="2">
+    <div class="wrap cb-inner">
+      <span class="cb-no">课程 2</span>
+      <h3 class="cb-title">长护险申请 / 评估（机构 + 个人）</h3>
+      <p class="cb-sub">掌握申请路径、评估流程与经办实务</p>
+    </div>
+  </div>
 
-<!-- ==================== 04 ==================== -->
-<section id="c4">
+<section data-course="2" id="c4">
   <div class="wrap">
     <span class="eyebrow reveal">第四章 · 失能等级评估</span>
     <span class="num-tag reveal">04</span>
@@ -404,34 +489,29 @@
     </div>
   </div>
 </section>
-
-<!-- ==================== 05 ==================== -->
-<section id="c5">
+<section data-course="2" id="c8">
   <div class="wrap">
-    <span class="eyebrow reveal">第五章 · 服务形式与服务规范</span>
-    <span class="num-tag reveal">05</span>
-    <h2 class="reveal d1">服务形式与<span class="hl">服务规范</span></h2>
-    <p class="lead reveal d1">定点机构根据失能人员及家属实际需求，确定服务频次、时长、项目并签订服务协议。生活照料护理服务项目按六大类划分，另含医疗护理服务项目。</p>
+    <span class="eyebrow reveal">第八章 · 重度失智人员政策</span>
+    <span class="num-tag reveal">08</span>
+    <h2 class="reveal d1">重度失智<span class="hl">人员政策</span></h2>
+    <p class="lead reveal d1">在重点保障重度失能人员基础上，向重度失智人员延伸。依据《关于进一步完善长期护理保险制度 加强与医疗康复养老助残政策贯通的通知》，对<b>残疾等级为智力一、二级的残疾人</b>实行直接认定，无需重复失能等级评估。</p>
 
-    <div class="tbl-wrap reveal d2">
-      <table>
-        <thead><tr><th>类别（六大类）</th><th>服务内容（示例）</th><th>项目数</th><th>说明</th></tr></thead>
-        <tbody>
-          <tr><td>① 清洁卫生类</td><td>协助沐浴、口腔清洁、洗脸梳头、理发</td><td rowspan="6"><span class="en">42 项</span></td><td>个人卫生与生活环境清洁</td></tr>
-          <tr><td>② 营养摄取类</td><td>协助进食 / 饮水、鼻饲进食、餐具清洁</td><td>营养摄入协助</td></tr>
-          <tr><td>③ 排泄护理类</td><td>协助如厕、更换尿布、造口 / 失禁护理</td><td>排泄照护与皮肤保护</td></tr>
-          <tr><td>④ 移动舒适和安全护理类</td><td>协助翻身、床上移动、转移、助行</td><td>体位管理与安全防护</td></tr>
-          <tr><td>⑤ 生命体征观察与护理类</td><td>体温 / 脉搏 / 血压观察、睡眠照料</td><td>健康状态观察记录</td></tr>
-          <tr><td>⑥ 用药指导类</td><td>协助服药、用药提醒、安全看护</td><td>用药协助与综合性支持</td></tr>
-        </tbody>
-      </table>
+    <div class="grid g2 reveal d2" style="margin-bottom:30px">
+      <div class="card" style="border-color:rgba(255,180,84,.4)"><span class="ic">直接认定</span><h4>直接认定</h4><p>残疾等级为智力一、二级的残疾人，参照重度失能人员标准执行（统一按<b style="color:var(--amber-soft)">重度失能Ⅱ级</b>），系统自动跳过自评量表，直接纳入保障。</p></div>
+      <div class="card" style="border-color:rgba(255,107,94,.4)"><span class="ic">浙里办路径</span><h4>浙里办路径</h4><p>浙里办 APP → 搜"浙里医保" → 热门服务"浙里长护在线" → "我是长护申请人" → "失智申请"，线上办、零跑腿。</p></div>
     </div>
-    <p class="body reveal d3" style="margin-top:18px;color:var(--muted)">服务规范：生活照料护理服务项目依据 <b style="color:var(--amber-soft)">金医保中心发〔2025〕4号</b> 明确，共 <b style="color:var(--amber-soft)">六大类 42 项</b>；医疗护理服务另含换药、清创、吸痰等 <b style="color:var(--amber-soft)">33 项</b>。定点机构须按协议提供服务，居家护理每周上门不少于 2 次。</p>
+
+    <h4 class="reveal d3" style="font-family:var(--serif);color:var(--gold);font-size:19px;margin-bottom:12px">浙里办申请流程</h4>
+    <div class="steps reveal d4">
+      <div class="step"><div class="n"></div><div><h4>阅读须知与承诺</h4><p>进入"失智申请"界面，阅读申请须知并签署申请承诺；本人申请直接办理，代办先绑定代办人。</p></div></div>
+      <div class="step"><div class="n"></div><div><h4>系统自动校验</h4><p>残联数据共享比对申请人是否为有效智力一 / 二级残疾人员，且智慧医保中无当前有效评估结论，通过方可进入下一步。</p></div></div>
+      <div class="step"><div class="n"></div><div><h4>提交材料</h4><p>无需填写自评量表，仅需填写长护待遇申请基础信息，并上传身份证、残疾证等附件后提交。</p></div></div>
+      <div class="step"><div class="n"></div><div><h4>经办受理审核</h4><p>经办通过智慧医保系统受理审核；审核通过后系统自动建立评估任务，并完成执行、审核、公示及送达。</p></div></div>
+      <div class="step"><div class="n"></div><div><h4>享受待遇</h4><p>系统在"失智评估录入"标注"重度失智"，自认定次月起按重度失能Ⅱ级标准享受相应待遇。</p></div></div>
+    </div>
   </div>
 </section>
-
-<!-- ==================== 06 ==================== -->
-<section id="c6">
+<section data-course="2" id="c6">
   <div class="wrap">
     <span class="eyebrow reveal">第六章 · 经办管理与服务流程</span>
     <span class="num-tag reveal">06</span>
@@ -454,9 +534,39 @@
     </div>
   </div>
 </section>
+  <!-- ============ COURSE 3 ============ -->
+  <div class="course-banner" data-course="3">
+    <div class="wrap cb-inner">
+      <span class="cb-no">课程 3</span>
+      <h3 class="cb-title">服务开展、管理及验收</h3>
+      <p class="cb-sub">落地服务规范、机构管理与评价验收</p>
+    </div>
+  </div>
 
-<!-- ==================== 07 ==================== -->
-<section id="c7">
+<section data-course="3" id="c5">
+  <div class="wrap">
+    <span class="eyebrow reveal">第五章 · 服务形式与服务规范</span>
+    <span class="num-tag reveal">05</span>
+    <h2 class="reveal d1">服务形式与<span class="hl">服务规范</span></h2>
+    <p class="lead reveal d1">定点机构根据失能人员及家属实际需求，确定服务频次、时长、项目并签订服务协议。生活照料护理服务项目按六大类划分，另含医疗护理服务项目。</p>
+
+    <div class="tbl-wrap reveal d2">
+      <table>
+        <thead><tr><th>类别（六大类）</th><th>服务内容（示例）</th><th>项目数</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td>① 清洁卫生类</td><td>协助沐浴、口腔清洁、洗脸梳头、理发</td><td rowspan="6"><span class="en">42 项</span></td><td>个人卫生与生活环境清洁</td></tr>
+          <tr><td>② 营养摄取类</td><td>协助进食 / 饮水、鼻饲进食、餐具清洁</td><td>营养摄入协助</td></tr>
+          <tr><td>③ 排泄护理类</td><td>协助如厕、更换尿布、造口 / 失禁护理</td><td>排泄照护与皮肤保护</td></tr>
+          <tr><td>④ 移动舒适和安全护理类</td><td>协助翻身、床上移动、转移、助行</td><td>体位管理与安全防护</td></tr>
+          <tr><td>⑤ 生命体征观察与护理类</td><td>体温 / 脉搏 / 血压观察、睡眠照料</td><td>健康状态观察记录</td></tr>
+          <tr><td>⑥ 用药指导类</td><td>协助服药、用药提醒、安全看护</td><td>用药协助与综合性支持</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="body reveal d3" style="margin-top:18px;color:var(--muted)">服务规范：生活照料护理服务项目依据 <b style="color:var(--amber-soft)">金医保中心发〔2025〕4号</b> 明确，共 <b style="color:var(--amber-soft)">六大类 42 项</b>；医疗护理服务另含换药、清创、吸痰等 <b style="color:var(--amber-soft)">33 项</b>。定点机构须按协议提供服务，居家护理每周上门不少于 2 次。</p>
+  </div>
+</section>
+<section data-course="3" id="c7">
   <div class="wrap">
     <span class="eyebrow reveal">第七章 · 双定点管理</span>
     <span class="num-tag reveal">07</span>
@@ -492,33 +602,7 @@
     <p class="body reveal d4" style="margin-top:16px;color:var(--muted)">注：医疗护理费用由 PDPM 分组纳入医保统筹基金；DRG 住院、ICU / 层流 / 特级护理期间长护险不重复享受。丽水、宁波、舟山执行地市原规则。</p>
   </div>
 </section>
-
-<!-- ==================== 08 ==================== -->
-<section id="c8">
-  <div class="wrap">
-    <span class="eyebrow reveal">第八章 · 重度失智人员政策</span>
-    <span class="num-tag reveal">08</span>
-    <h2 class="reveal d1">重度失智<span class="hl">人员政策</span></h2>
-    <p class="lead reveal d1">在重点保障重度失能人员基础上，向重度失智人员延伸。依据《关于进一步完善长期护理保险制度 加强与医疗康复养老助残政策贯通的通知》，对<b>残疾等级为智力一、二级的残疾人</b>实行直接认定，无需重复失能等级评估。</p>
-
-    <div class="grid g2 reveal d2" style="margin-bottom:30px">
-      <div class="card" style="border-color:rgba(255,180,84,.4)"><span class="ic">直接认定</span><h4>直接认定</h4><p>残疾等级为智力一、二级的残疾人，参照重度失能人员标准执行（统一按<b style="color:var(--amber-soft)">重度失能Ⅱ级</b>），系统自动跳过自评量表，直接纳入保障。</p></div>
-      <div class="card" style="border-color:rgba(255,107,94,.4)"><span class="ic">浙里办路径</span><h4>浙里办路径</h4><p>浙里办 APP → 搜"浙里医保" → 热门服务"浙里长护在线" → "我是长护申请人" → "失智申请"，线上办、零跑腿。</p></div>
-    </div>
-
-    <h4 class="reveal d3" style="font-family:var(--serif);color:var(--gold);font-size:19px;margin-bottom:12px">浙里办申请流程</h4>
-    <div class="steps reveal d4">
-      <div class="step"><div class="n"></div><div><h4>阅读须知与承诺</h4><p>进入"失智申请"界面，阅读申请须知并签署申请承诺；本人申请直接办理，代办先绑定代办人。</p></div></div>
-      <div class="step"><div class="n"></div><div><h4>系统自动校验</h4><p>残联数据共享比对申请人是否为有效智力一 / 二级残疾人员，且智慧医保中无当前有效评估结论，通过方可进入下一步。</p></div></div>
-      <div class="step"><div class="n"></div><div><h4>提交材料</h4><p>无需填写自评量表，仅需填写长护待遇申请基础信息，并上传身份证、残疾证等附件后提交。</p></div></div>
-      <div class="step"><div class="n"></div><div><h4>经办受理审核</h4><p>经办通过智慧医保系统受理审核；审核通过后系统自动建立评估任务，并完成执行、审核、公示及送达。</p></div></div>
-      <div class="step"><div class="n"></div><div><h4>享受待遇</h4><p>系统在"失智评估录入"标注"重度失智"，自认定次月起按重度失能Ⅱ级标准享受相应待遇。</p></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== 09 ==================== -->
-<section id="c9">
+<section data-course="3" id="c9">
   <div class="wrap">
     <span class="eyebrow reveal">第九章 · 定点机构管理</span>
     <span class="num-tag reveal">09</span>
@@ -553,9 +637,7 @@
     <p class="body reveal d4" style="margin-top:16px;color:var(--muted)">定点机构申请：依法登记的养老机构、取得《医疗机构执业许可证》的医疗机构、备案的残疾人托养机构，可向医保经办机构申请长护定点，经评估后签订协议。</p>
   </div>
 </section>
-
-<!-- ==================== Q&A ==================== -->
-<section id="qa">
+<section data-course="3" id="qa">
   <div class="wrap">
     <span class="eyebrow reveal">常见答疑</span>
     <span class="num-tag reveal">Q&A</span>
@@ -572,7 +654,6 @@
     </div>
   </div>
 </section>
-
 <footer>
   <div class="wrap">
     <div class="disclaim">
@@ -701,9 +782,19 @@
   var tocList=document.getElementById('toc-list');
   var btnToc=document.getElementById('btn-toc');
 
-  // populate TOC
+  // populate TOC (with course group headers)
+  var courseNames={'1':'课程一 · 长护险政策与制度','2':'课程二 · 长护险申请 / 评估（机构 + 个人）','3':'课程三 · 服务开展、管理及验收'};
+  var curCourse=null;
   sections.forEach(function(s){
     if(s.id==='top')return;
+    var dc=s.getAttribute('data-course');
+    if(dc && dc!==curCourse){
+      curCourse=dc;
+      var gh=document.createElement('li');
+      gh.className='toc-group';
+      gh.textContent=courseNames[dc]||('课程'+dc);
+      tocList.appendChild(gh);
+    }
     var li=document.createElement('li');
     li.style.listStyle='none';
     var a=document.createElement('a');
